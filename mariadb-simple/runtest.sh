@@ -63,6 +63,7 @@ rlJournalStart
             rlRun "sed -i -e \"s#\\\$ORIGIN/libmyodbc3.so#$MYODBCLIB#\" /etc/odbcinst.ini" 0 "Changing libmyodbc path to $MYODBCLIB"
         fi
         mariadbStart
+        rlRun "echo 'SET PASSWORD FOR \`root\`@localhost = PASSWORD(\"\");' | mysql" 0 'Set empty password to root'
 #        rlRun "mariadbCreateTestDB"
     rlPhaseEnd
 
