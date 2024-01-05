@@ -1,0 +1,39 @@
+summary: Basic smoke-test for accessing MySQL via unixODBC
+description: ''
+enabled: true
+link:
+  - relates: https://bugzilla.redhat.com/show_bug.cgi?id=1561400
+  - relates: https://bugzilla.redhat.com/show_bug.cgi?id=1550611
+tag:
+  - Tier1
+tier: '1'
+adjust:
+  - enabled: false
+    when: distro < rhel-7
+    continue: false
+  - enabled: false
+    when: distro < rhel-alt-7
+    continue: false
+  - because: the used connector was obsoleted by mariadb-connector-odbc
+    enabled: false
+    when: distro >= rhel-8
+    continue: false
+contact: Jakub Heger <jheger@redhat.com>
+component:
+  - mariadb
+  - mysql-connector-odbc
+  - unixODBC
+test: ./runtest.sh
+framework: beakerlib
+require:
+  - library(mariadb55/basic)
+recommend:
+  - unixODBC
+  - unixODBC-libs
+  - mysql-connector-odbc
+  - mariadb-server
+duration: 5m
+extra-nitrate: TC#0564050
+extra-summary: /CoreOS/unixODBC/mariadb-simple
+extra-task: /CoreOS/unixODBC/mariadb-simple
+id: 01b2dbaf-4a5c-4fde-b5ec-afa1ed5f8e41
